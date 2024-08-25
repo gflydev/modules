@@ -3,8 +3,8 @@ package storages3
 import (
 	"fmt"
 	awsS3 "github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
-	_utils "github.com/gflydev/modules/storage/utils"
 	"github.com/gflydev/storage"
 	"github.com/gflydev/storage/s3"
 	"net/url"
@@ -42,7 +42,7 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	fsS3 := storage.Instance(s3.Type)
 
 	for _, file := range files {
-		object, _ := _utils.RequestPath(file.File)
+		object, _ := utils.RequestPath(file.File)
 		object = object[1:] // Remove first slash
 
 		newObject := fmt.Sprintf("%s/%s", file.Dir, file.Name)
