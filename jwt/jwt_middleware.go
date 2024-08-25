@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"errors"
 	"github.com/gflydev/core"
+	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/db"
 	"github.com/gflydev/modules/jwt/model"
@@ -36,11 +36,11 @@ func New(excludes ...string) core.MiddlewareHandler {
 		if err != nil {
 			log.Errorf("Check JWT error '%v'", err)
 
-			return errors.New("jwt token was blocked")
+			return errors.New("JWT token was blocked")
 		}
 
 		if isBlocked {
-			return errors.New("invalid JWT token")
+			return errors.New("Invalid JWT token")
 		}
 
 		// Get claims from JWT.
@@ -48,13 +48,13 @@ func New(excludes ...string) core.MiddlewareHandler {
 		if err != nil {
 			log.Errorf("Parse JWT error '%v'", err)
 
-			return errors.New("parse JWT error")
+			return errors.New("Parse JWT error")
 		}
 
 		if claims.Expires < time.Now().Unix() {
 			log.Errorf("JWT token expired '%v'", jwtToken)
 
-			return errors.New("jwt token expired")
+			return errors.New("JWT token expired")
 		}
 
 		var user = model.User{}
@@ -64,7 +64,7 @@ func New(excludes ...string) core.MiddlewareHandler {
 		if err != nil {
 			log.Errorf("User not found '%v'", err)
 
-			return errors.New("user not found")
+			return errors.New("User not found")
 		}
 
 		c.Root().Response.SetStatusCode(core.StatusOK)
