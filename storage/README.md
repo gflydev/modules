@@ -11,7 +11,7 @@ PUT /api/v1/storage/legitimize-files
 ### Usage
 Install
 ```bash
-go get -u github.com/gflydev/modules/storage@v1.0.0
+go get -u github.com/gflydev/modules/storage@v1.0.1
 ```
 
 File `main.go`
