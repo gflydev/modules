@@ -7,7 +7,6 @@ import (
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
-	_utils "github.com/gflydev/modules/storage/utils"
 	"github.com/gflydev/storage"
 	"github.com/gflydev/storage/local"
 	"time"
@@ -20,7 +19,7 @@ func PresignedURL(objectKey string) (string, string, error) {
 	tempObjectKey := fmt.Sprintf("%s/%s", core.TempDir, objectKey)
 
 	preSignURL = preSignerObject(tempObjectKey)
-	fileKey, _ := _utils.RequestParam(preSignURL, "G-Key")
+	fileKey, _ := utils.RequestParam(preSignURL, "G-Key")
 	fileURL = fmt.Sprintf("%s/storage/tmp/%s.%s",
 		core.AppURL,
 		fileKey,
@@ -35,7 +34,7 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	var legitimizeItems []dto.LegitimizeItem
 
 	for _, file := range files {
-		object, _ := _utils.RequestPath(file.File)
+		object, _ := utils.RequestPath(file.File)
 		object = object[1:] // Remove first slash
 
 		dir := fmt.Sprintf("%s/%s", core.AppDir, file.Dir)

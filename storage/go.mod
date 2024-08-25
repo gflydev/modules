@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	github.com/gflydev/cache v1.0.1
-	github.com/gflydev/core v1.9.0
+	github.com/gflydev/core v1.10.1
 	github.com/gflydev/storage v1.1.0
 	github.com/gflydev/storage/local v1.1.0
 	github.com/gflydev/validation v1.0.0
