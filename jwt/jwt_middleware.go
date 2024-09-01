@@ -31,8 +31,8 @@ func New(excludes ...string) core.MiddlewareHandler {
 		// Forge status code 401 (Unauthorized) instead 500 (internal error)
 		c.Root().Response.SetStatusCode(core.StatusUnauthorized)
 
-		jwtToken := ExtractJWTToken(c)
-		isBlocked, err := IsBlockedJWTToken(jwtToken)
+		jwtToken := ExtractToken(c)
+		isBlocked, err := IsBlockedToken(jwtToken)
 		if err != nil {
 			log.Errorf("Check JWT error '%v'", err)
 

@@ -58,9 +58,9 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 		return c.Error(errors.New("Invalid JWT token"))
 	}
 
-	jwtToken := jwt.ExtractJWTToken(c)
+	jwtToken := jwt.ExtractToken(c)
 	// Refresh new pairs of access token & refresh token
-	tokens, err := jwt.RefreshJWTToken(jwtToken, refreshToken.Token)
+	tokens, err := jwt.RefreshToken(jwtToken, refreshToken.Token)
 	if err != nil {
 		return c.Error(errors.New("Error %v", err))
 	}

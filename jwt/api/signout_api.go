@@ -28,7 +28,7 @@ type SignOutApi struct {
 // @Security ApiKeyAuth
 // @Router /auth/signout [delete]
 func (h *SignOutApi) Handle(c *core.Ctx) error {
-	jwtToken := jwt.ExtractJWTToken(c)
+	jwtToken := jwt.ExtractToken(c)
 
 	err := jwt.SignOut(jwtToken)
 	if err != nil {

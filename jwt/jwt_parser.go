@@ -16,8 +16,8 @@ type TokenMetadata struct {
 	Expires     int64
 }
 
-// ExtractJWTToken func to get JWT from header.
-func ExtractJWTToken(c *core.Ctx) string {
+// ExtractToken func to get JWT from header.
+func ExtractToken(c *core.Ctx) string {
 	bearToken := c.Root().Request.Header.Peek(core.HeaderAuthorization)
 
 	// Normally Authorization HTTP header.

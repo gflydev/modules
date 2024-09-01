@@ -88,7 +88,7 @@ func SignUp(signUp *dto.SignUp) (*model.User, error) {
 // SignOut function takes in jwtToken string, utils.ExtractTokenMetadata extract access token metadata
 // to get a userID which is the key that store refresh token in the Redis Caching
 // then delete refresh token from the Redis
-// and DeleteJWTToken will delete access token
+// and DeleteToken will delete access token
 // by send it to black-list (middleware will handle invalid token in blacklist).
 func SignOut(jwtToken string) error {
 	// Extract access token metadata
@@ -107,12 +107,12 @@ func SignOut(jwtToken string) error {
 	}
 
 	// Delete access token by send it to black-list
-	DeleteJWTToken(jwtToken)
+	DeleteToken(jwtToken)
 	return nil
 }
 
-// RefreshJWTToken function to refresh JWT token from user.
-func RefreshJWTToken(jwtToken, refreshToken string) (*Tokens, error) {
+// RefreshToken function to refresh JWT token from user.
+func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
 	// Get claims from JWT.
 	claims, err := ExtractTokenMetadata(jwtToken)
 	if err != nil {
@@ -155,7 +155,7 @@ func RefreshJWTToken(jwtToken, refreshToken string) (*Tokens, error) {
 	}
 
 	// Delete JWT token by sending it to blacklist
-	DeleteJWTToken(jwtToken)
+	DeleteToken(jwtToken)
 
 	return tokens, nil
 }
@@ -185,8 +185,8 @@ func GetUserByToken(jwtToken string) *model.User {
 	return repository.Pool.GetUserByID(userID)
 }
 
-// DeleteJWTToken add jwtToken to blacklist
-func DeleteJWTToken(jwtToken string) bool {
+// DeleteToken add jwtToken to blacklist
+func DeleteToken(jwtToken string) bool {
 	key := fmt.Sprintf("%s:%s", utils.Getenv("JWT_BLACKLIST", ""), jwtToken)
 
 	// Set expired minutes count for a secret key from .env file.
@@ -203,8 +203,8 @@ func DeleteJWTToken(jwtToken string) bool {
 	return true
 }
 
-// IsBlockedJWTToken Check if jwtToken is locked or not
-func IsBlockedJWTToken(jwtToken string) (bool, error) {
+// IsBlockedToken Check if jwtToken is locked or not
+func IsBlockedToken(jwtToken string) (bool, error) {
 	key := fmt.Sprintf("%s:%s", utils.Getenv("JWT_BLACKLIST", ""), jwtToken)
 
 	// Get refresh token to Redis.
