@@ -10,7 +10,6 @@ import (
 	"github.com/gflydev/modules/jwt/dto"
 	"github.com/gflydev/modules/jwt/model"
 	"github.com/gflydev/modules/jwt/repository"
-	_utils "github.com/gflydev/modules/jwt/utils"
 	"strconv"
 	"time"
 )
@@ -23,7 +22,7 @@ func SignIn(signIn *dto.SignIn) (*Tokens, error) {
 		return nil, errors.New("Invalid email address or password")
 	}
 	// Compare given user password with stored in found user.
-	isValidPassword := _utils.ComparePasswords(user.Password, signIn.Password)
+	isValidPassword := utils.ComparePasswords(user.Password, signIn.Password)
 	if !isValidPassword {
 		return nil, errors.New("Invalid email address or password")
 	}
@@ -67,7 +66,7 @@ func SignUp(signUp *dto.SignUp) (*model.User, error) {
 
 	// Set initialized default data for user
 	user.Email = signUp.Email
-	user.Password = _utils.GeneratePassword(signUp.Password)
+	user.Password = utils.GeneratePassword(signUp.Password)
 	user.Fullname = signUp.Fullname
 	user.Phone = signUp.Phone
 	user.Token = null.String("")
