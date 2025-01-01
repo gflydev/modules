@@ -6,8 +6,8 @@ import (
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/middleware/cors"
 	"github.com/gflydev/modules/storages3/api"
-	_ "github.com/gflydev/storage/s3"
 	"github.com/gflydev/view/pongo"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 // =========================================================================================
@@ -54,7 +54,7 @@ func (m *HomePage) Handle(c *core.Ctx) error {
 //                                     Routers
 // =========================================================================================
 
-func router(g core.IFlyRouter) {
+func router(g core.IFly) {
 	prefixAPI := fmt.Sprintf(
 		"/%s/%s",
 		utils.Getenv("API_PREFIX", "api"),

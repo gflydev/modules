@@ -55,7 +55,7 @@ func (m *HomePage) Handle(c *core.Ctx) error {
 //                                     Routers
 // =========================================================================================
 
-func router(g core.IFlyRouter) {
+func router(g core.IFly) {
 	prefixAPI := fmt.Sprintf(
 		"/%s/%s",
 		utils.Getenv("API_PREFIX", "api"),
