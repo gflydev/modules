@@ -2,12 +2,10 @@ module examples
 
 go 1.22.6
 
-replace github.com/gflydev/modules/storagecs3 => ../
-
 require (
 	github.com/gflydev/core v1.11.0
 	github.com/gflydev/middleware/cors v1.0.0
-	github.com/gflydev/modules/storagecs3 v0.0.0-00010101000000-000000000000
+	github.com/gflydev/modules/storagecs3 v1.0.0
 	github.com/gflydev/view/pongo v1.0.2
 	github.com/joho/godotenv v1.5.1
 )

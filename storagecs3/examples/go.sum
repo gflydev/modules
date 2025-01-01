@@ -49,6 +49,7 @@ github.com/gflydev/middleware/cors v1.0.0 h1:Or/VMpycTfr7UQy1yH4+huCOKSa85jLExQU
 github.com/gflydev/middleware/cors v1.0.0/go.mod h1:rVf8jB19Mmc9BBKoy8QHs8moBLBh/fHMIdP8IwK6PXQ=
 github.com/gflydev/modules/storage v1.0.3 h1:IbjGGo92+l7kQgNa4GZpvTODMHbNM7QyZ0nFoE72YCI=
 github.com/gflydev/modules/storage v1.0.3/go.mod h1:JrkzBtYifUldT8xQTXTDtDeN2NrvqZtKNS09Y6F2tNo=
+github.com/gflydev/modules/storagecs3 v1.0.0/go.mod h1:XvD2cj34z6l0oTjuGjGWwAuwPHUr2noGpgDeH63kfcg=
 github.com/gflydev/storage v1.1.2 h1:50k5JALXafUP8HcDcbKIf1ckMJuDs1e86dTxIh68EyA=
 github.com/gflydev/storage v1.1.2/go.mod h1:Diib2gklMylJ5W6lo/rr3ShXUVowkV1riCXZlB1MWzU=
 github.com/gflydev/storage/cs3 v1.1.0 h1:UhKW7T2Omv8945jxsfdN+fqp14JFcBC4p/CDJNDh9ns=

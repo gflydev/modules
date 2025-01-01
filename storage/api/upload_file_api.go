@@ -6,7 +6,6 @@ import (
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
-	"github.com/gflydev/storage"
 	"github.com/gflydev/storage/local"
 )
 
@@ -70,7 +69,7 @@ func (h *UploadFileApi) Handle(c *core.Ctx) error {
 	filePath := fmt.Sprintf("%s/%s", core.TempDir, fileName)
 
 	// Get file system `local`
-	fs := storage.Instance(local.Type)
+	fs := local.New()
 
 	fs.PutData(filePath, body)
 

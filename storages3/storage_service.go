@@ -5,24 +5,22 @@ import (
 	awsS3 "github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
-	"github.com/gflydev/storage"
 	"github.com/gflydev/storage/s3"
 	"net/url"
-	"os"
 )
 
 // PresignedURL generate pre-signed upload URL from Local storage
 func PresignedURL(objectKey string) (string, string, error) {
 	var preSignURL, fileURL string
-	fsS3 := s3.New()
+	fs := s3.New()
 
 	preSigner := PreSigner{
-		PreSignClient: awsS3.NewPresignClient(fsS3.S3Client),
+		PreSignClient: awsS3.NewPresignClient(fs.S3Client),
 	}
 
-	tempObjectKey := fmt.Sprintf("%s/%s", os.Getenv("AWS_S3_TEMP"), objectKey)
+	tempObjectKey := fmt.Sprintf("%s/%s", utils.Getenv("AWS_S3_TEMP", ""), objectKey)
 
-	object, err := preSigner.PutObject(os.Getenv("AWS_S3_BUCKET"), tempObjectKey, 60*3)
+	object, err := preSigner.PutObject(utils.Getenv("AWS_S3_BUCKET", ""), tempObjectKey, 60*3)
 	if err != nil {
 		return "", "", err
 	}
@@ -39,7 +37,7 @@ func PresignedURL(objectKey string) (string, string, error) {
 // LegitimizeFiles make file list available
 func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	var legitimizeItems []dto.LegitimizeItem
-	fsS3 := storage.Instance(s3.Type)
+	fs := s3.New()
 
 	for _, file := range files {
 		object, _ := utils.RequestPath(file.File)
@@ -47,8 +45,8 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 
 		newObject := fmt.Sprintf("%s/%s", file.Dir, file.Name)
 
-		fsS3.Move(object, newObject)
-		file.LegitimizeURL = fsS3.Url(newObject)
+		fs.Move(object, newObject)
+		file.LegitimizeURL = fs.Url(newObject)
 
 		legitimizeItems = append(legitimizeItems, file)
 	}

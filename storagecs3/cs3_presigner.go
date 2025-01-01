@@ -1,4 +1,4 @@
-package storages3
+package storagecs3
 
 import (
 	"context"

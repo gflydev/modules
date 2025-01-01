@@ -7,7 +7,6 @@ import (
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
-	"github.com/gflydev/storage"
 	"github.com/gflydev/storage/local"
 	"time"
 )
@@ -32,6 +31,7 @@ func PresignedURL(objectKey string) (string, string, error) {
 // LegitimizeFiles make file list available
 func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	var legitimizeItems []dto.LegitimizeItem
+	fs := local.New()
 
 	for _, file := range files {
 		object, _ := utils.RequestPath(file.File)
@@ -40,8 +40,6 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 		dir := fmt.Sprintf("%s/%s", core.AppDir, file.Dir)
 		newObject := fmt.Sprintf("%s/%s", dir, file.Name)
 		newObjectPath := fmt.Sprintf("%s/%s/%s", core.StorageDir, file.Dir, file.Name)
-
-		fs := storage.Instance(local.Type)
 
 		fs.MakeDir(dir) // Try to create new dir if not existed
 		fs.Move(object, newObject)
