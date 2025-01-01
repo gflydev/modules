@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	_ "github.com/gflydev/cache/redis"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/middleware/cors"
-	"github.com/gflydev/modules/storage/api"
 	"github.com/gflydev/modules/storagecs3/api"
 	"github.com/gflydev/view/pongo"
 	_ "github.com/joho/godotenv/autoload"
@@ -72,8 +70,6 @@ func router(g core.IFly) {
 		/* ============================ Storage Group ==========================================*/
 		apiRouter.Group("/storage", func(uploadGroup *core.Group) {
 			uploadGroup.GET("/presigned-url", api.NewPresignedURLApi())      // Get presigned URL
-			uploadGroup.POST("/uploads", api.NewUploadApi())                 // Upload files to server by Field Form
-			uploadGroup.PUT("/uploads/{file_name}", api.NewUploadFileApi())  // Upload a file to server via Body (Binary)
 			uploadGroup.PUT("/legitimize-files", api.NewLegitimizeFileApi()) // Legitimize uploaded file
 		})
 	})

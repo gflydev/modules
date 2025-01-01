@@ -28,9 +28,11 @@ github.com/gflydev/core v1.9.0/go.mod h1:/YjYOURtefBGNqkQWGtP51A6eWkTovh9di2N81R
 github.com/gflydev/core v1.10.4/go.mod h1:sqOR2Ctb5KCpCclRCzMY/d0DuAX2lugMTvqPv/dB/iM=
 github.com/gflydev/core v1.10.5/go.mod h1:sqOR2Ctb5KCpCclRCzMY/d0DuAX2lugMTvqPv/dB/iM=
 github.com/gflydev/core v1.10.6/go.mod h1:ueXLtWEDNMEDmK3t4yry06gpJOQAHChb4bdTLAPgyZA=
+github.com/gflydev/core v1.11.0/go.mod h1:ueXLtWEDNMEDmK3t4yry06gpJOQAHChb4bdTLAPgyZA=
 github.com/gflydev/db v1.1.0 h1:LtJSA+ufPYIjvauNF6sHQ2uyijmBxs4IbGNPH9Wnf5A=
 github.com/gflydev/db v1.1.0/go.mod h1:LynT2rQi4V4f+LKmI6g0jfzYTeqhMMG7kY85rWjf6e8=
 github.com/gflydev/db v1.3.0/go.mod h1:7MbqbsbwtKcP6PzLpmSp7q5ahSidYJ/kjbLoUoFcvHs=
+github.com/gflydev/db v1.4.1/go.mod h1:KtxiJClS9CUitAPtSReIvA9S78QbbF0F6FMRFnYat2Y=
 github.com/gflydev/db/psql v1.0.0 h1:LwggK0ZYM6I7ezpkbKFY/4f7Tv0JyKPLLQvTdrHwrTw=
 github.com/gflydev/db/psql v1.0.0/go.mod h1:eNegaePS4alfFlodcoSddt2Pvpdb46PYf+lXB/GZY/o=
 github.com/gflydev/middleware/cors v1.0.0 h1:Or/VMpycTfr7UQy1yH4+huCOKSa85jLExQU2YORmHfo=
@@ -63,6 +65,7 @@ github.com/jackc/puddle/v2 v2.2.1 h1:RhxXJtFG022u4ibrCSMSiu5aOq1i77R3OHKNJj77OAk
 github.com/jackc/puddle/v2 v2.2.1/go.mod h1:vriiEXHvEE654aYKXXjOvZM39qJ0q+azkZFrfEOc3H4=
 github.com/jiveio/fluentsql v1.3.9 h1:1ogVfLDgMiB0Lho5t7q25kHe8kxH7YjQBu1to1Pm4p8=
 github.com/jiveio/fluentsql v1.3.9/go.mod h1:SXSRbuBAqsOIJYSRj78nE2y1/ri27h4LzmoClHAeSjg=
+github.com/jiveio/fluentsql v1.4.0/go.mod h1:SXSRbuBAqsOIJYSRj78nE2y1/ri27h4LzmoClHAeSjg=
 github.com/jmoiron/sqlx v1.4.0 h1:1PLqN7S1UYp5t4SrVVnt4nUVNemrDAtxlulVe+Qgm3o=
 github.com/jmoiron/sqlx v1.4.0/go.mod h1:ZrZ7UsYB/weZdl2Bxg6jCRO9c3YHl8r3ahlKmRT4JLY=
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=

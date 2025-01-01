@@ -8,8 +8,8 @@ require github.com/gflydev/modules/jwt v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/gflydev/cache v1.0.4
-	github.com/gflydev/core v1.10.6
-	github.com/gflydev/db v1.3.0
+	github.com/gflydev/core v1.11.0
+	github.com/gflydev/db v1.4.1
 	github.com/gflydev/db/psql v1.0.0
 	github.com/gflydev/middleware/cors v1.0.0
 	github.com/gflydev/view/pongo v1.0.2
@@ -30,7 +30,7 @@ require (
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.6.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
-	github.com/jiveio/fluentsql v1.3.9 // indirect
+	github.com/jiveio/fluentsql v1.4.0 // indirect
 	github.com/jmoiron/sqlx v1.4.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
