@@ -19,20 +19,19 @@ func PresignedURL(objectKey string) (string, string, error) {
 		PreSignClient: awsS3.NewPresignClient(fs.S3Client),
 	}
 
-	tempObjectKey := fmt.Sprintf("%s/%s", utils.Getenv("CS_TEMP", ""), objectKey)
+	tempObjectKey := fmt.Sprintf("%s/%s", utils.Getenv("WS_TEMP", ""), objectKey)
 
-	object, err := preSigner.PutObject(utils.Getenv("CS_BUCKET", ""), tempObjectKey, 60*3)
+	object, err := preSigner.PutObject(utils.Getenv("WS_BUCKET", ""), tempObjectKey, 60*3)
 	if err != nil {
 		return "", "", err
 	}
 
 	// Parse file URL
 	u, _ := url.Parse(object.URL)
-	bucket := utils.Getenv("CS_BUCKET", "")
-	bucketCode := utils.Getenv("CS_BUCKET_CODE", "")
+	bucket := utils.Getenv("WS_BUCKET", "")
 
 	preSignURL = object.URL
-	fileURL = fmt.Sprintf("%s://%s/%s:%s/%s", u.Scheme, u.Host, bucketCode, bucket, tempObjectKey)
+	fileURL = fmt.Sprintf("%s://%s/%s/%s", u.Scheme, u.Host, bucket, tempObjectKey)
 
 	return preSignURL, fileURL, nil
 }
@@ -42,9 +41,8 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	var legitimizeItems []dto.LegitimizeItem
 	fs := ws3.New()
 
-	bucket := utils.Getenv("CS_BUCKET", "")
-	bucketCode := utils.Getenv("CS_BUCKET_CODE", "")
-	bucketPath := fmt.Sprintf("%s:%s/", bucketCode, bucket)
+	bucket := utils.Getenv("WS_BUCKET", "")
+	bucketPath := fmt.Sprintf("%s/", bucket)
 
 	for _, file := range files {
 		object, _ := utils.RequestPath(file.File)

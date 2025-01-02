@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Upload file to CS3
+# Upload file to Contabo S3
 #
 
 file_path='../../../storages3/examples/public/assets'

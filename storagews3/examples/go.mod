@@ -2,6 +2,8 @@ module examples
 
 go 1.22.6
 
+replace github.com/gflydev/modules/storagews3 => ../
+
 require (
 	github.com/gflydev/core v1.11.0
 	github.com/gflydev/middleware/cors v1.0.0
@@ -32,10 +34,10 @@ require (
 	github.com/aws/smithy-go v1.22.1 // indirect
 	github.com/flosch/pongo2/v6 v6.0.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.7 // indirect
-	github.com/gflydev/modules/storage v1.0.3 // indirect
+	github.com/gflydev/modules/storage v1.0.4 // indirect
 	github.com/gflydev/storage v1.1.2 // indirect
-	github.com/gflydev/storage/ws3 v1.1.0 // indirect
 	github.com/gflydev/storage/local v1.1.2 // indirect
+	github.com/gflydev/storage/ws3 v1.0.1 // indirect
 	github.com/gflydev/validation v1.0.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Upload file to S3
+# Upload file to Wasabi S3
 #
 
 file_path='../../../storages3/examples/public/assets'
