@@ -3,7 +3,7 @@
 # Upload file to S3
 #
 
-file_path='../public/assets'
+file_path='../../../storages3/examples/public/assets'
 file_name='hero.png'
 file_type='image/png'
 bucket_name='avatars'
