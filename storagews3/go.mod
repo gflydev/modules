@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.1
 	github.com/gflydev/core v1.11.3
-	github.com/gflydev/modules/storage v1.0.4
+	github.com/gflydev/modules/storage v1.0.5
 	github.com/gflydev/storage/ws3 v1.1.4
 	github.com/gflydev/validation v1.0.2
 )
@@ -30,6 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.18 // indirect
 	github.com/aws/smithy-go v1.22.3 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
+	github.com/gflydev/cache v1.0.5 // indirect
 	github.com/gflydev/storage v1.1.3 // indirect
 	github.com/gflydev/storage/local v1.1.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect

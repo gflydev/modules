@@ -108,6 +108,8 @@ github.com/gabriel-vasile/mimetype v1.4.8 h1:FfZ3gj38NjllZIeJAmMhr+qKL8Wu+nOoI3G
 github.com/gabriel-vasile/mimetype v1.4.8/go.mod h1:ByKUIKGjh1ODkGM1asKUbQZOLGrPjydw3hYPU2YU9t8=
 github.com/gflydev/cache v1.0.4 h1:IQfw02cjcmwFJd6+wjG2z/l8IDwxI8Jdr9Ye1dEgKp0=
 github.com/gflydev/cache v1.0.4/go.mod h1:Jh6+w9GYFmFqNoTtSqeVIydpB3Kdl8iAWEGCVnDYRZg=
+github.com/gflydev/cache v1.0.5 h1:LzU265TDhGmi7/Urly00EwwFG+vKyAL/JHfCdi22VqU=
+github.com/gflydev/cache v1.0.5/go.mod h1:5hN2Ja+9vZyH2au1QSoBDesQLV/1YPrDXCiB1/Sh6ZA=
 github.com/gflydev/core v1.10.6 h1:6SZvyLuhkZkXGTTuULEHl1mJYD/fqGGXguRnQumBhWc=
 github.com/gflydev/core v1.10.6/go.mod h1:ueXLtWEDNMEDmK3t4yry06gpJOQAHChb4bdTLAPgyZA=
 github.com/gflydev/core v1.11.0 h1:iyH4RoOrRnqlUWCWfXQFhoetRYV8EIBUez9V8KruoJI=
@@ -120,6 +122,8 @@ github.com/gflydev/modules/storage v1.0.3 h1:IbjGGo92+l7kQgNa4GZpvTODMHbNM7QyZ0n
 github.com/gflydev/modules/storage v1.0.3/go.mod h1:JrkzBtYifUldT8xQTXTDtDeN2NrvqZtKNS09Y6F2tNo=
 github.com/gflydev/modules/storage v1.0.4 h1:x/oLC47xzeknSE1TH7/9AdPlsgyvj8d7gTaJr3E81VY=
 github.com/gflydev/modules/storage v1.0.4/go.mod h1:ATCJhNX3xOCDElVQ2GZ1kLMY1xlyUiqslf570fqokH4=
+github.com/gflydev/modules/storage v1.0.5 h1:W4VhTEjMIWPGNVJYcTLNQvM0G9dMzQ8FDXVFJ9NaqyA=
+github.com/gflydev/modules/storage v1.0.5/go.mod h1:nIrIT7WBAsxu+x6NwunokSTqCQByym/fbvtWmnSyLbI=
 github.com/gflydev/storage v1.1.1 h1:UfA8Q95pqt+Y3oLpf2aQcbVsSTdXCI+pR4Qupy1fueQ=
 github.com/gflydev/storage v1.1.1/go.mod h1:lcAY8HT89JkNNVfNw7xQIjHRZj6LC1otMi+mcju1SSI=
 github.com/gflydev/storage v1.1.2 h1:50k5JALXafUP8HcDcbKIf1ckMJuDs1e86dTxIh68EyA=
