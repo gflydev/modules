@@ -7,7 +7,6 @@ import (
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/middleware/cors"
 	"github.com/gflydev/modules/storage/api"
-	"github.com/gflydev/modules/storagecs3/api"
 	"github.com/gflydev/view/pongo"
 	_ "github.com/joho/godotenv/autoload"
 )
