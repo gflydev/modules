@@ -2,7 +2,6 @@ package storagews3
 
 import (
 	"fmt"
-	awsS3 "github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
 	"github.com/gflydev/storage/ws3"
@@ -16,7 +15,7 @@ func PresignedURL(objectKey string) (string, string, error) {
 	fs := ws3.New()
 
 	preSigner := PreSigner{
-		PreSignClient: awsS3.NewPresignClient(fs.S3Client),
+		MinioClient: fs.S3Client,
 	}
 
 	tempObjectKey := fmt.Sprintf("%s/%s", utils.Getenv("WS_TEMP", ""), objectKey)
