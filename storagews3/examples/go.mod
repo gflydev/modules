@@ -7,7 +7,7 @@ toolchain go1.24.2
 replace github.com/gflydev/modules/storagews3 => ../
 
 require (
-	github.com/gflydev/core v1.17.2
+	github.com/gflydev/core v1.17.6
 	github.com/gflydev/middleware/cors v1.0.0
 	github.com/gflydev/modules/storagews3 v1.0.0
 	github.com/gflydev/view/pongo v1.0.2
@@ -35,12 +35,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.34.1 // indirect
 	github.com/aws/smithy-go v1.22.4 // indirect
 	github.com/flosch/pongo2/v6 v6.0.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
 	github.com/gflydev/modules/storage v1.0.5 // indirect
-	github.com/gflydev/storage v1.1.5 // indirect
+	github.com/gflydev/storage v1.1.6 // indirect
 	github.com/gflydev/storage/local v1.1.5 // indirect
-	github.com/gflydev/storage/ws3 v1.1.6 // indirect
-	github.com/gflydev/validation v1.2.0 // indirect
+	github.com/gflydev/storage/ws3 v1.1.7 // indirect
+	github.com/gflydev/validation v1.2.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.27.0 // indirect
@@ -49,9 +49,9 @@ require (
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.64.0 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/net v0.42.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	github.com/valyala/fasthttp v1.66.0 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
 )
