@@ -4,6 +4,7 @@ import (
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
+	_ "github.com/gflydev/http"
 	"github.com/gflydev/modules/storage/response"
 	"github.com/gflydev/modules/storage/transformer"
 )
@@ -55,8 +56,8 @@ func (h *UploadApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param file formData file true "File"
 // @Success 200
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Security ApiKeyAuth
 // @Router /storage/uploads [post]
 func (h *UploadApi) Handle(c *core.Ctx) error {

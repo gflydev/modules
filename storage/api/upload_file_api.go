@@ -6,6 +6,7 @@ import (
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
+	_ "github.com/gflydev/http"
 	"github.com/gflydev/storage/local"
 )
 
@@ -59,8 +60,8 @@ func (h *UploadFileApi) Validate(c *core.Ctx) error {
 // @Param file_name path string true "File name"
 // @Param G-Key query string true "G-Key"
 // @Param data body string true "Upload file"
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Security ApiKeyAuth
 // @Router /storage/uploads/{file_name} [put]
 func (h *UploadFileApi) Handle(c *core.Ctx) error {

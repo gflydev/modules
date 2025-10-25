@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gflydev/core"
+	_ "github.com/gflydev/http"
 	"github.com/gflydev/modules/storage/dto"
 	"github.com/gflydev/modules/storage/request"
 	"github.com/gflydev/modules/storagecs3"
@@ -65,8 +66,8 @@ func (h *LegitimizeFileApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Success 200 {array} dto.LegitimizeItem
 // @Param data body request.LegitimizeFile true "Legitimize uploaded file payload"
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Security ApiKeyAuth
 // @Router /storage/legitimize-files [put]
 func (h *LegitimizeFileApi) Handle(c *core.Ctx) error {

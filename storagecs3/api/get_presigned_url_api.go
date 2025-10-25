@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gflydev/core"
+	_ "github.com/gflydev/http"
 	"github.com/gflydev/modules/storage/response"
 	"github.com/gflydev/modules/storagecs3"
 )
@@ -46,8 +47,8 @@ func (h *PresignedURLApi) Validate(c *core.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param filename query string true "Filename"
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Success 200 {object} response.PresignedURL
 // @Security ApiKeyAuth
 // @Router /storage/presigned-url [get]
