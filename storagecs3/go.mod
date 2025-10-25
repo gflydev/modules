@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gflydev/core v1.17.11
 	github.com/gflydev/http v1.0.1
-	github.com/gflydev/modules/storage v1.0.5
+	github.com/gflydev/modules/storage v1.0.6
 	github.com/gflydev/storage/cs3 v1.2.3
 	github.com/gflydev/validation v1.2.1
 	github.com/minio/minio-go/v7 v7.0.95
@@ -16,7 +16,6 @@ require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
-	github.com/gflydev/cache v1.0.5 // indirect
 	github.com/gflydev/db v1.12.4 // indirect
 	github.com/gflydev/storage v1.1.6 // indirect
 	github.com/gflydev/storage/local v1.1.7 // indirect

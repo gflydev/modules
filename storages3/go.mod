@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.39.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.7
 	github.com/gflydev/core v1.17.11
-	github.com/gflydev/modules/storage v1.0.5
+	github.com/gflydev/modules/storage v1.0.6
 	github.com/gflydev/storage/s3 v1.1.8
 	github.com/gflydev/validation v1.2.1
 )

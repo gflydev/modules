@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/gflydev/core v1.17.11
-	github.com/gflydev/modules/storage v1.0.5
+	github.com/gflydev/modules/storage v1.0.6
 	github.com/gflydev/storage v1.1.6
 	github.com/gflydev/storage/ws3 v1.1.8
 	github.com/gflydev/validation v1.2.1
