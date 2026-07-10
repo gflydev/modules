@@ -29,6 +29,7 @@ func (preSigner PreSigner) GetObject(
 	if err != nil {
 		log.Printf("Couldn't get a presigned request to get %v:%v. Here's why: %v\n",
 			bucketName, objectKey, err)
+		return nil, err
 	}
 	return &PresignedHTTPRequest{URL: presignedURL.String()}, nil
 }

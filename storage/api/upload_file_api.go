@@ -7,6 +7,7 @@ import (
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
 	_ "github.com/gflydev/http"
+	"github.com/gflydev/modules/storage"
 	"github.com/gflydev/storage/local"
 )
 
@@ -34,6 +35,13 @@ func (h *UploadFileApi) Validate(c *core.Ctx) error {
 	key := c.QueryStr("G-Key")
 	fileName := c.PathVal("file_name")
 	storageKey := fmt.Sprintf("storage:%s", key)
+
+	// Reject path traversal / nested paths in the target file name before
+	// it is joined with the temp directory.
+	if !storage.IsSafeFileName(fileName) {
+		log.Errorf("Invalid upload file name '%s'", fileName)
+		return errors.New("Invalid file name")
+	}
 
 	// Check uploading key
 	if _, err := cache.Get(storageKey); err != nil {
@@ -72,7 +80,10 @@ func (h *UploadFileApi) Handle(c *core.Ctx) error {
 	// Get file system `local`
 	fs := local.New()
 
-	fs.PutData(filePath, body)
+	if !fs.PutData(filePath, body) {
+		log.Errorf("Failed to write uploaded file '%s'", filePath)
+		return errors.New("Failed to store file")
+	}
 
 	return c.NoContent()
 }

@@ -73,7 +73,7 @@ func SignUp(signUp *dto.SignUp) (*model.User, error) {
 	user.Status = status
 	user.CreatedAt = time.Now()
 	user.UpdatedAt = time.Now()
-	user.LastAccessAt = null.NowTime()
+	user.LastAccessAt = null.TimeNow()
 
 	// Create a new user with validated data.
 	err := repository.Pool.CreateUser(user)
@@ -131,7 +131,7 @@ func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
 	}
 
 	if refreshToken != val {
-		log.Errorf("Mismatch refresh token '%s' vs input refresh token '%s'", refreshToken, val)
+		log.Errorf("Mismatch refresh token for user '%s'", userIDStr)
 
 		return nil, errors.New("refresh token mismatch")
 	}
@@ -145,7 +145,7 @@ func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
 
 	// Set expired days from .env file.
 	ttlDays := utils.Getenv("JWT_TTL_OVER_DAYS", 0)
-	duration := time.Duration(ttlDays*7*24*3600) * time.Second
+	duration := time.Duration(ttlDays*24*3600) * time.Second
 
 	// Update refresh token to Redis.
 	if err = cache.Set(userIDStr, tokens.Refresh, duration); err != nil {

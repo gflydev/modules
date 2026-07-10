@@ -252,7 +252,7 @@ func RefreshToken(jwtToken, refreshToken string) (*auth.Token, error) {
 
 	// Set expired days from .env file.
 	ttlDays := utils.Getenv(auth.TtlOverDays, 0)
-	duration := time.Duration(ttlDays*7*24*3600) * time.Second
+	duration := time.Duration(ttlDays*24*3600) * time.Second
 
 	// Update refresh token to Redis.
 	if err = cache.Set(userIDStr, tokens.Refresh, duration); err != nil {

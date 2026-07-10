@@ -57,18 +57,16 @@ func New(excludes ...string) core.MiddlewareHandler {
 			return errors.New("JWT token expired")
 		}
 
-		var user = model.User{}
-
 		// Keep user ID.
-		err = db.GetModel(&user, "id", claims.UserID)
-		if err != nil {
+		user, err := db.GetModelByID[model.User](claims.UserID)
+		if err != nil || user == nil {
 			log.Errorf("User not found '%v'", err)
 
 			return errors.New("User not found")
 		}
 
 		c.Root().Response.SetStatusCode(core.StatusOK)
-		c.SetData(User, user)
+		c.SetData(User, *user)
 		return nil
 	}
 }
