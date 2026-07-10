@@ -92,7 +92,7 @@ func IsValidRefreshToken(refreshToken string) bool {
 	if len(tokenString) < 2 {
 		return false
 	}
-	expires, err := strconv.ParseInt(tokenString[1], 0, 64)
+	expires, err := strconv.ParseInt(tokenString[1], 10, 64)
 	if err != nil {
 		log.Infof("parse refresh token error %v", err)
 

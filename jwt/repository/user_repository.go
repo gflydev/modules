@@ -12,18 +12,15 @@ type UserRepository struct {
 
 // findOne query that getting one model by a specific field condition.
 func (q *UserRepository) findOne(field string, value any) *model.User {
-	// Create an instance of User
-	m := model.User{}
-
-	// Get model and assign into `m` struct
-	err := mb.GetModel(&m, field, value)
+	// Get model by field/value condition
+	m, err := mb.GetModelBy[model.User](field, value)
 
 	// Return an empty model
 	if err != nil {
 		return nil
 	}
 
-	return &m
+	return m
 }
 
 // GetUserByID query for getting one User by given ID.

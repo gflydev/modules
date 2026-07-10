@@ -1,6 +1,8 @@
 package services
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/gflydev/core/log"
@@ -48,19 +50,27 @@ func ForgotPassword(forgotPassword dto.ForgotPassword) error {
 		return errors.New("invalid input data")
 	}
 
-	// Create a new SHA256 hash.
-	hash := utils.Sha256(user.Email, time.Now().Unix())
+	// Generate a cryptographically-random, unguessable reset token.
+	resetToken, err := generateResetToken()
+	if err != nil {
+		log.Errorf("Service forgot password error '%v'", err)
 
-	user.Token = dbNull.String(interpolateToken(hash))
+		return errors.New("service error")
+	}
+
+	user.Token = dbNull.String(interpolateToken(resetToken))
 	user.UpdatedAt = time.Now()
 
 	if err := mb.UpdateModel(user); err != nil {
 		return errors.New("service error")
 	}
 
-	// Send notification via mail
+	// Send notification via mail. The raw token (without the storage prefix)
+	// is embedded in the reset link.
 	if err := notification.Send(notifications.ResetPassword{
 		Email: user.Email,
+		Name:  user.Fullname,
+		Token: resetToken,
 	}); err != nil {
 		log.Errorf("Service forgot password error '%v'", err)
 
@@ -129,4 +139,15 @@ func ChangePassword(resetPassword dto.ResetPassword) error {
 
 func interpolateToken(token string) string {
 	return fmt.Sprintf("reset_password:%s", token)
+}
+
+// generateResetToken returns a cryptographically-secure random token
+// (32 bytes, hex-encoded) suitable for password-reset links.
+func generateResetToken() (string, error) {
+	buf := make([]byte, 32)
+	if _, err := rand.Read(buf); err != nil {
+		return "", err
+	}
+
+	return hex.EncodeToString(buf), nil
 }

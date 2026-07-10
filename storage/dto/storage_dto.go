@@ -15,5 +15,7 @@ type LegitimizeItem struct {
 
 // LegitimizeFile struct to describe legitimize list of uploaded File.
 type LegitimizeFile struct {
-	Files []LegitimizeItem `json:"files" validate:"required"`
+	// `dive` is required so the per-item rules on LegitimizeItem
+	// (required, max=255) are actually validated for each element.
+	Files []LegitimizeItem `json:"files" validate:"required,dive"`
 }

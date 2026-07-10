@@ -8,6 +8,8 @@ import (
 	"github.com/gflydev/core/utils"
 	"github.com/gflydev/modules/storage/dto"
 	"github.com/gflydev/storage/local"
+	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -15,9 +17,18 @@ import (
 func PresignedURL(objectKey string) (string, string, error) {
 	var preSignURL, fileURL string
 
+	// Reject traversal / absolute paths in the caller-supplied object key.
+	if !IsSafeRelPath(objectKey) {
+		return "", "", fmt.Errorf("invalid object key %q", objectKey)
+	}
+
 	tempObjectKey := fmt.Sprintf("%s/%s", core.TempDir, objectKey)
 
-	preSignURL = preSignerObject(tempObjectKey)
+	preSignURL, err := preSignerObject(tempObjectKey)
+	if err != nil {
+		return "", "", err
+	}
+
 	fileKey, _ := utils.RequestParam(preSignURL, "G-Key")
 	fileURL = fmt.Sprintf("%s/storage/tmp/%s.%s",
 		core.AppURL,
@@ -34,15 +45,32 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 	fs := local.New()
 
 	for _, file := range files {
-		object, _ := utils.RequestPath(file.File)
-		object = object[1:] // Remove first slash
+		// Validate user-supplied path components to prevent traversal
+		// outside of the application / storage roots.
+		if !IsSafeRelPath(file.Dir) || !IsSafeFileName(file.Name) {
+			log.Errorf("Legitimize file rejected: unsafe dir '%s' or name '%s'", file.Dir, file.Name)
+			continue
+		}
+
+		object, err := utils.RequestPath(file.File)
+		if err != nil || len(object) == 0 {
+			log.Errorf("Legitimize file rejected: bad source path '%s' (%v)", file.File, err)
+			continue
+		}
+		object = strings.TrimPrefix(object, "/") // Remove first slash
 
 		dir := fmt.Sprintf("%s/%s", core.AppDir, file.Dir)
 		newObject := fmt.Sprintf("%s/%s", dir, file.Name)
 		newObjectPath := fmt.Sprintf("%s/%s/%s", core.StorageDir, file.Dir, file.Name)
 
-		fs.MakeDir(dir) // Try to create new dir if not existed
-		fs.Move(object, newObject)
+		if !fs.MakeDir(dir) { // Try to create new dir if not existed
+			log.Errorf("Legitimize file: make dir '%s' failed", dir)
+			continue
+		}
+		if !fs.Move(object, newObject) {
+			log.Errorf("Legitimize file: move '%s' -> '%s' failed", object, newObject)
+			continue
+		}
 
 		file.LegitimizeURL = fs.Url(newObjectPath)
 
@@ -53,7 +81,7 @@ func LegitimizeFiles(files []dto.LegitimizeItem) []dto.LegitimizeItem {
 }
 
 // PreSignerObject generate Pre sign URL for a object for uploading
-func preSignerObject(object string) string {
+func preSignerObject(object string) (string, error) {
 	uploadEndpoint := utils.Getenv("STORAGE_PRESIGNED_URL", "/api/v1/storage/uploads")
 	// Make random data
 	currentTime := time.Now().Format("20060102150405")
@@ -66,10 +94,44 @@ func preSignerObject(object string) string {
 	// Caching Key
 	key := fmt.Sprintf("storage:%s", value)
 
-	// Save refresh token to Redis.
+	// Save upload token to cache. On failure return an error instead of
+	// terminating the process (previously log.Fatalf → os.Exit, a remote DoS).
 	if err := cache.Set(key, value, time.Duration(30)*time.Minute); err != nil {
-		log.Fatalf("Signin error '%v'", err)
+		log.Errorf("Presigned URL cache error '%v'", err)
+
+		return "", err
 	}
 
-	return fmt.Sprintf("%s/%s?G-Key=%s&G-Time=%s", uploadEndpoint, fileName, value, currentTime)
+	return fmt.Sprintf("%s/%s?G-Key=%s&G-Time=%s", uploadEndpoint, fileName, value, currentTime), nil
+}
+
+// IsSafeFileName reports whether name is a plain file name with no path
+// separators or traversal sequences.
+func IsSafeFileName(name string) bool {
+	if name == "" {
+		return false
+	}
+	if strings.ContainsAny(name, "/\\") {
+		return false
+	}
+
+	return IsSafeRelPath(name)
+}
+
+// IsSafeRelPath reports whether p is a relative path that stays within its
+// base directory (no `..` traversal, no absolute path).
+func IsSafeRelPath(p string) bool {
+	if p == "" || strings.Contains(p, "\x00") {
+		return false
+	}
+	if filepath.IsAbs(p) || strings.HasPrefix(p, "/") {
+		return false
+	}
+
+	cleaned := filepath.ToSlash(filepath.Clean(p))
+	if cleaned == ".." || strings.HasPrefix(cleaned, "../") {
+		return false
+	}
+
+	return true
 }
